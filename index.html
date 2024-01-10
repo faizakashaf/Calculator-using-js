@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Using Javascript</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form class="form">
+                <input type="text" class="inputValue" value="" name="inputValue" oninput=validateNum(this)>
+                <div id="underline"></div>
+                <div>
+                    <input type="button" class="btn left" value="AC" onclick="clearInput()">
+                    <input type="button" class="btn" value="DE" onclick="deleteLastCharacter()">
+                    <input type="button" class="btn" value="√" style="color:red; font-weight:bold"
+                        onclick="performOperation('√')">
+                    <input type="button" class="btn" value="/" style="color:blue;font-weight:bold"
+                        onclick="performOperation('/')">
+                </div>
+                <div>
+                    <input type="button" class="btn  left " value="7" onclick="addNum('7')">
+                    <input type="button" class="btn " value="8" onclick="addNum('8')">
+                    <input type="button" class="btn " value="9" onclick="addNum('9')">
+                    <input type="button" class="btn" value="*" style="color:blue;font-weight:bold"
+                        onclick="performOperation('*')">
+                </div>
+                <div>
+                    <input type="button" class="btn left " value="4" onclick="addNum('4')">
+                    <input type="button" class="btn " value="5" onclick="addNum('5')">
+                    <input type="button" class="btn " value="6" onclick="addNum('6')">
+                    <input type="button" class="btn" value="-" style="color:blue;font-weight:bold"
+                        onclick="performOperation('-')">
+                </div>
+                <div>
+                    <input type="button" class="btn left " value="1" onclick="addNum('1')">
+                    <input type="button" class="btn " value="2" onclick="addNum('2')">
+                    <input type="button" class="btn " value="3" onclick="addNum('3')">
+                    <input type="button" class="btn " value="+" style="color:blue;font-weight:bold"
+                        onclick="performOperation('+')">
+                </div>
+                <div>
+                    <input type="button" class="btn left " value="0" onclick="addNum('0')">
+                    <input type="button" class="btn " value="00" onclick="addNum('00')">
+                    <input type="button" class="btn" value="." style="font-weight:bold" onclick="performOperation('.')">
+                    <input id="equal" type="button" class="btn" value="=" style="font-weight:bold"
+                        onclick="performOperation('=')">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        const inputValue = document.querySelector(".inputValue");
+        // inputValue.style.direction = "rtl";
+        inputValue.style.textAlign = "right";
+        const equalBtn = document.querySelector("#equal");
+
+
+        function addNum(inputnum) {
+            inputValue.value += inputnum
+        }
+
+        function performOperation(operator) {
+            switch (operator) {
+                case "=":
+                    inputValue.value = eval(inputValue.value)
+                    break;
+                case "√":
+                    inputValue.value = Math.sqrt(inputValue.value)
+                    break;
+                case "-":
+                case "+":
+                case "*":
+                case "/":
+                case ".":
+                    inputValue.value += operator;
+                    break;
+            }
+        }
+
+        function deleteLastCharacter() {
+            inputValue.style.direction = "ltr";
+            inputValue.value = (inputValue.value).toString().slice(0, -1);
+        }
+
+        function clearInput() {
+            inputValue.value = " ";
+        }
+
+        // restriction set for only nymbers input
+        function validateNum(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+    </script>
+</body>
+
+</html>
